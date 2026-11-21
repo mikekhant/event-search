@@ -7,7 +7,7 @@ SETUP
 SEARCH
 3. Use the rotation table in the profile to pick today's topic groups. NET is covered every day.
 4. For each group, search the web first (the site or host name plus the topic), then open the addresses the searches returned. Page reads are refused for addresses that did not come from a search in the same run. Load WebSearch with ToolSearch if it is deferred. If you have no direct page-reading tool, use whatever page-reading route this session offers (for example a web-fetch subagent) and ask for several URLs in one request.
-5. Run limits for the whole run: at most 14 web searches and at most 25 page reads. Count them.
+5. Run limits for the whole run: at most 14 web searches and at most 40 page reads. Count them.
 6. An event qualifies only if every one of these is true:
    - It passes every filter in the profile (date window, price, location rule for its day of week, open registration).
    - You confirmed its date, including the year, from the event's own page or from a listing that shows the date. Drop anything marked as a past event. Never list an event from a search snippet alone. Skip events that start today before 10:00 AM.
