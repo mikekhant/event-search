@@ -55,7 +55,7 @@ NET is covered every day, including the Luma hosts listed under it. The other gr
 
 How to read them: page reading in a scheduled run is refused for addresses that did not come from a web search in the same run. So search first (the site or host name plus a topic), then open the address the search returned. The addresses below tell you what to search for. Listing pages often show past events, so confirm every date.
 
-Luma is the owner's preferred source. Most of their example events are on Luma.
+Luma is the owner's preferred source. Most of their example events are on Luma. Partiful (partiful.com) is the second preferred source, especially for fun and social events such as run clubs, raves, parties and game nights. Search "Partiful" plus the topic and area, for example "Partiful run club Orange County", "Partiful rave Los Angeles", "Partiful Irvine", then open the partiful.com event addresses the search returns.
 
 NET
 - Luma hosts: tech night! orange county (luma.com/itstechnight), Tech Link Up (luma.com/techlinkup), Orange County AI (orangecountyai.com/events), EvoNexus Irvine, Ascend GenAI, The AI Collective Orange County. Search "Luma" plus the host name, and "Luma Irvine tech event", "Luma Orange County AI networking".
@@ -69,19 +69,22 @@ UCI
 
 SOCIAL
 - Luma: Persimmon Season Social Club; search "Luma mahjong night Orange County", "Luma matcha social Irvine"
+- Partiful: search "Partiful mahjong", "Partiful game night Orange County", "Partiful social Irvine"
 - Meetup and Eventbrite game night and social events near Irvine
 
 WELL
 - Luma: ALO events (luma.com/aloevents), weekends only for Los Angeles; search "Luma yoga pilates Orange County", "run club Orange County", "free HIIT class Irvine"
+- Partiful: search "Partiful run club Orange County", "Partiful pilates", "Partiful yoga Orange County"
 - Eventbrite and Meetup fitness events near Irvine
 
 SPORT
 - Eventbrite and Meetup pickleball and golf events near Irvine
-- Search "pickleball social Irvine", "golf mixer Orange County"
+- Search "pickleball social Irvine", "golf mixer Orange County", "Partiful pickleball Orange County"
 
 NIGHT
 - 19hz.info (Los Angeles and Southern California listing)
 - dice.fm Los Angeles techno and electronic listings
+- Partiful: search "Partiful rave Los Angeles", "Partiful house music Orange County", "Partiful DJ night Long Beach"
 
 HIKE
 - Meetup outdoor activities near Irvine (meetup.com/find/us--ca--irvine/outdoor-activities)

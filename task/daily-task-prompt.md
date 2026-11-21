@@ -13,8 +13,9 @@ SEARCH
    - You confirmed its date, including the year, from the event's own page or from a listing that shows the date. Drop anything marked as a past event. Never list an event from a search snippet alone. Skip events that start today before 10:00 AM.
    - Its URL is not in the log (ignore query strings and trailing slashes), and no log line has the same title and event date.
    - It does not match anything in the declined doc. A declined event is never shown again. A declined series means no future session of that recurring event. A declined host means nothing from that host.
+   Exception for Luma and Partiful only: if an event page on luma.com or partiful.com loads, fits the profile, is not marked as past, but shows no date, you may list it in the "Date unconfirmed" part of the digest. Use the date from the search result if one was shown, otherwise write "date not shown". List at most 8 of these per run, and never list one that a search result or the page suggests is over.
    Give the price whenever the page or listing shows it. Only if it truly is not shown may you write "price not listed".
-7. Choose up to 20 events, ranked by fit, mixing professional and personal topics when you can. List at most one session of any recurring series. Fewer than 20 is fine. Never pad the list and never invent an event, date, price or link.
+7. Choose up to 20 events in total (confirmed and unconfirmed together), ranked by fit, mixing professional and personal topics when you can. List at most one session of any recurring series. Fewer than 20 is fine. Never pad the list and never invent an event, date, price or link.
 
 WRITE
 8. Read `event-search/event-digest.md` if it exists. Put today's section at the top and keep only the 7 most recent daily sections. Write the doc back with project_write. Use this format:
@@ -24,10 +25,17 @@ WRITE
    Why: one short line on the fit.
    Sign up: https://...
 
+### Date unconfirmed, check the page before you plan around it
+4. **Event title** | date not shown | Venue, City | Free | SOCIAL
+   Why: one short line on the fit.
+   Sign up: https://luma.com/...
+
 Run stats: 6 searches, 11 page reads. Could not read: (sources that failed, or "none").
 
+   Leave out the "Date unconfirmed" heading when there are no such events. The count in the section title covers both parts. If a section for today already exists, add a new part under it headed "### Additional run" and do not rewrite the earlier entries.
+
    If nothing new qualifies, the section body is "No new qualifying events today." followed by the run stats line.
-9. Update `event-search/event-log.md`: add one line per listed event in the form `shown YYYY-MM-DD | event YYYY-MM-DD | title | url`, remove lines whose event date is more than 2 days in the past, and write the doc back.
+9. Update `event-search/event-log.md`: add one line per listed event, confirmed or unconfirmed, in the form `shown YYYY-MM-DD | event YYYY-MM-DD | title | url` (write `event unknown` when the date is unconfirmed), remove lines whose event date is more than 2 days in the past and `event unknown` lines shown more than 21 days ago, and write the doc back.
 10. Your final message is today's digest section, exactly as written to the doc.
 
 RULES
