@@ -100,17 +100,25 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 <section id="status">
   <h2><span class="n">01</span>Status</h2>
   <div class="status">
-    <div class="tile"><span class="k">Phase</span><span class="v">1 Initiation, at Gate 1</span></div>
-    <div class="tile"><span class="k">Health</span><span class="v"><span class="pill green">Green</span> Charter drafted, nothing blocked</span></div>
-    <div class="tile"><span class="k">Next gate</span><span class="v">Gate 1 Charter approval, target Nov 20, 2026</span></div>
-    <div class="tile"><span class="k">Budget used</span><span class="v">First reading pending</span></div>
-    <div class="tile"><span class="k">Last sync</span><span class="v">None yet. Hub created Nov 20, 2026</span></div>
+    <div class="tile"><span class="k">Phase</span><span class="v">2 Planning, at Gate 2</span></div>
+    <div class="tile"><span class="k">Health</span><span class="v"><span class="pill yellow">Yellow</span> Memory test for the daily run is blocked on D-02</span></div>
+    <div class="tile"><span class="k">Next gate</span><span class="v">Gate 2 Plan and team approval, target Nov 21, 2026</span></div>
+    <div class="tile"><span class="k">Budget used</span><span class="v">Not tracked, by sponsor decision</span></div>
+    <div class="tile"><span class="k">Last sync</span><span class="v">None yet. Hub updated Nov 20, 2026</span></div>
   </div>
 </section>
 
 <section id="decisions">
   <h2><span class="n">02</span>Decisions needed from me</h2>
-  <p class="empty">No open decision requests. Gate 1 sign-off is pending.</p>
+  <h3>D-02: May the CoS create a one-time test task to check that scheduled runs can save to the project?</h3>
+  <p><strong>Why now:</strong> the no-repeats rule depends on the daily run remembering what it showed. The first attempt to create the test task was blocked by a permission check, so it needs the sponsor's explicit go-ahead.</p>
+  <ul>
+    <li><strong>A (recommended):</strong> approve the test. One run, a few minutes, writes one small test doc to the project. No scope or time impact.</li>
+    <li><strong>B:</strong> skip the test and build the daily task directly. Saves a step, but a memory failure would only show up as repeats on day 2.</li>
+    <li><strong>C:</strong> the sponsor creates scheduled tasks by hand in the app from prompts the CoS supplies. Works around any block, costs the sponsor a few minutes per task.</li>
+  </ul>
+  <p><strong>If no answer:</strong> the CoS continues with the interest profile, source list and task prompt, which do not depend on it.</p>
+  <p>Gate 2 sign-off is also pending.</p>
 </section>
 
 <section id="orders">
@@ -130,7 +138,7 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
     <thead><tr><th>Name</th><th>Role</th><th>Owns</th><th>Model</th><th>Chat name</th><th>Report</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td>CoS</td><td>Chief of Staff and builder</td><td>Hub, plan, interest profile, daily task, verification</td><td>Current chat</td><td>This chat</td><td>This Hub</td><td><span class="pill green">Active</span></td></tr>
-      <tr><td>Reviewer</td><td>Independent check</td><td>Acceptance review of the first 3 digests</td><td>Set at Gate 2</td><td>Not created</td><td>Not created</td><td><span class="pill plain">Planned</span></td></tr>
+      <tr><td>Reviewer</td><td>Independent check</td><td>Acceptance review of the first 3 digests</td><td>Sonnet 5.5</td><td>Event Search Reviewer</td><td>Not created</td><td><span class="pill plain">Planned</span></td></tr>
     </tbody>
   </table>
   </div>
@@ -206,8 +214,8 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 
   <h3>Assumptions</h3>
   <ul>
-    <li><strong>Unverified:</strong> a scheduled run can read and write the project doc that holds the digest and the log. To be tested first in Phase 2. Fallback: a Google Drive doc.</li>
-    <li><strong>Unverified:</strong> public Luma event pages can be found and read by the daily run.</li>
+    <li><strong>Unverified:</strong> a scheduled run can read and write the project doc that holds the digest and the log. Test blocked on D-02. Fallback: a Google Drive doc.</li>
+    <li><strong>Verified Nov 20 from the CoS chat:</strong> public Luma event pages can be found by search and read. Search returns many past events, and Luma calendar pages omit dates, so each candidate page must be opened to confirm its date.</li>
     <li>An event is shown once and never again, whether or not the sponsor declined it. This covers the "do not show declined events" rule.</li>
     <li>Price means the listed ticket price before fees.</li>
     <li>Distance is judged by the event's city relative to Irvine, not by drive time.</li>
@@ -249,12 +257,92 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 
 <section id="plan">
   <h2><span class="n">06</span>Plan</h2>
-  <p class="empty">Work breakdown, timeline and responsibility matrix are produced in Phase 2, after Gate 1.</p>
+  <h3>Work breakdown</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>ID</th><th>Task</th><th>Deliverable</th><th>Owner</th><th>Acceptance criteria</th><th>Depends on</th></tr></thead>
+    <tbody>
+      <tr><td class="id">T1.1</td><td>Memory test: a one-time scheduled run writes a test doc</td><td>D4</td><td>CoS</td><td>Test doc is readable from the CoS chat; storage location chosen and logged</td><td>D-02</td></tr>
+      <tr><td class="id">T1.2</td><td>Write the interest profile and filter rules</td><td>D1</td><td>CoS</td><td>Lists all 11 topics, the distance rule by day of week, the 14-day window and the $50 cap; saved to the project and the repo</td><td>None</td></tr>
+      <tr><td class="id">T1.3</td><td>Build the source list</td><td>D1</td><td>CoS</td><td>Every topic has at least one listing page or search query; each source was read once and the result recorded</td><td>T1.2</td></tr>
+      <tr><td class="id">T1.4</td><td>Define the shown and declined log</td><td>D4</td><td>CoS</td><td>One line per event with URL, date shown and status; the sponsor can record a decline in one step</td><td>T1.1</td></tr>
+      <tr><td class="id">T2.1</td><td>Write the daily task prompt</td><td>D2</td><td>CoS</td><td>Stands alone; covers filters, topic rotation, run limits, digest format, log update and the nothing-new note; saved to the repo</td><td>T1.2 to T1.4</td></tr>
+      <tr><td class="id">T2.2</td><td>Dry run of the prompt in the CoS chat</td><td>D3</td><td>CoS</td><td>Digest meets success criteria 2 to 5; searches and page reads are counted and inside the run limits</td><td>T2.1</td></tr>
+      <tr><td class="id">T2.3</td><td>Create the daily scheduled task</td><td>D2</td><td>CoS</td><td>Task is listed with its next run at 8:00am America/Los_Angeles; push notifications on</td><td>T2.2</td></tr>
+      <tr><td class="id">T3.1</td><td>CoS verifies digests for days 1 to 3</td><td>D3, D4</td><td>CoS</td><td>Each digest checked against criteria 1 to 5, 7 and 8, with evidence in the Hub</td><td>T2.3</td></tr>
+      <tr><td class="id">T3.2</td><td>Independent review of days 1 to 3</td><td>D5</td><td>Reviewer</td><td>Report gives pass or fail per event for link, date, price and distance; every link opened</td><td>T2.3</td></tr>
+      <tr><td class="id">T3.3</td><td>Apply fixes from the review</td><td>D2</td><td>CoS</td><td>Each failed item is fixed in the prompt or sources and passes on the next run</td><td>T3.1, T3.2</td></tr>
+      <tr><td class="id">T4.1</td><td>Monitor days 4 to 7</td><td>D3</td><td>CoS</td><td>7 of 7 runs on time; zero repeats across the week</td><td>T3.3</td></tr>
+      <tr><td class="id">T4.2</td><td>Handoff note and lessons learned</td><td>D6</td><td>CoS</td><td>Says where everything lives, how to change interests, decline events and pause the task</td><td>T4.1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Daily run design</h3>
+  <ul>
+    <li><strong>Topic rotation:</strong> each run covers 4 or 5 of the 11 topics, so every topic is searched at least 3 times a week. AI, technology and consulting networking runs most days.</li>
+    <li><strong>Sources first:</strong> the run reads a fixed list of listing pages before it uses open search, because open search returns many past events.</li>
+    <li><strong>Run limits:</strong> up to 8 searches and 15 page reads per run. These guard cost and are not a project budget.</li>
+    <li><strong>Model:</strong> the CoS cannot choose the model for a scheduled task from this chat. It runs on whatever the task's settings use.</li>
+  </ul>
+
+  <h3>Timeline and milestones</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Milestone</th><th>Target</th><th>Depends on</th></tr></thead>
+    <tbody>
+      <tr><td>Gate 2 Plan and team approval</td><td>Nov 21, 2026</td><td>Sponsor sign-off, D-02</td></tr>
+      <tr><td>T1.1 to T2.3 complete, daily task created</td><td>Nov 21, 2026</td><td>Gate 2</td></tr>
+      <tr><td>First scheduled run</td><td>Nov 22, 2026, 8:00am</td><td>T2.3</td></tr>
+      <tr><td>Gate 3 Mid-point check</td><td>Nov 25, 2026</td><td>Runs on Nov 22, 23 and 24 verified and reviewed</td></tr>
+      <tr><td>Gate 4 Final acceptance</td><td>Nov 30, 2026</td><td>7 runs, Nov 22 to 28</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Responsibility matrix</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Deliverable</th><th>Does</th><th>Checks</th><th>Approves</th></tr></thead>
+    <tbody>
+      <tr><td>D1 Interest profile and filter rules</td><td>CoS</td><td>Sponsor</td><td>Sponsor</td></tr>
+      <tr><td>D2 Daily search task</td><td>CoS</td><td>Reviewer, through the digests</td><td>Sponsor</td></tr>
+      <tr><td>D3 Event Digest</td><td>Daily task</td><td>CoS and Reviewer</td><td>Sponsor</td></tr>
+      <tr><td>D4 Shown and declined log</td><td>Daily task</td><td>CoS</td><td>Sponsor</td></tr>
+      <tr><td>D5 Acceptance review</td><td>Reviewer</td><td>CoS</td><td>Sponsor</td></tr>
+      <tr><td>D6 Handoff note</td><td>CoS</td><td>Sponsor</td><td>Sponsor</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Quality plan</h3>
+  <ul>
+    <li><strong>D1:</strong> compared line by line with the sponsor's Phase 0 answers.</li>
+    <li><strong>D2:</strong> dry run before scheduling; prompt kept in the repo so every change is tracked.</li>
+    <li><strong>D3:</strong> for days 1 to 3, every link is opened and every date, price and location is checked by the CoS, then again by the Reviewer.</li>
+    <li><strong>D4:</strong> each day's digest is compared with the log for repeats.</li>
+    <li><strong>D5:</strong> the Reviewer did not build the task and works from the digests and the Charter only.</li>
+  </ul>
+
+  <h3>Check-in rhythm</h3>
+  <p>Run <strong>sync</strong> once a day after the 8:00am digest on Nov 22, 23 and 24, then once on Nov 28. Gate 3 follows the Nov 24 sync and Gate 4 follows the Nov 28 sync.</p>
 </section>
 
 <section id="risks">
   <h2><span class="n">07</span>Risk register</h2>
-  <p class="empty">The full register with likelihood, impact, owner and trigger is produced in Phase 2. The top 5 risks and responses are in the Charter.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>ID</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Owner</th><th>Trigger</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td class="id">R1</td><td>The daily run cannot save or read its log, so events repeat</td><td><span class="pill yellow">Medium</span></td><td><span class="pill red">High</span></td><td>CoS</td><td>T1.1 test doc missing, or any repeat in a digest</td><td>Move the log and digest to a Google Drive doc</td></tr>
+      <tr><td class="id">R2</td><td>Creating scheduled tasks is blocked by a permission check</td><td><span class="pill red">High</span>, happened once</td><td><span class="pill red">High</span></td><td>CoS</td><td>A second blocked attempt after sponsor approval</td><td>Sponsor creates the task in the app from the CoS prompt (D-02 option C)</td></tr>
+      <tr><td class="id">R3</td><td>Wrong details or past events listed</td><td><span class="pill red">High</span>, seen in testing</td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>Any listed event fails a date, price or link check</td><td>Run opens every event page before listing; Reviewer opens every link on days 1 to 3</td></tr>
+      <tr><td class="id">R4</td><td>Daily cost runs high</td><td><span class="pill yellow">Medium</span></td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>A run exceeds 8 searches or 15 page reads</td><td>Tighten rotation, trim sources, drop to fewer topics per run</td></tr>
+      <tr><td class="id">R5</td><td>Too few new qualifying events to reach 10 a day</td><td><span class="pill red">High</span></td><td><span class="pill green">Low</span></td><td>CoS</td><td>Fewer than 5 events on 3 days in a row</td><td>Add sources; ask the sponsor whether to widen the window or radius</td></tr>
+      <tr><td class="id">R6</td><td>Event sites block automated reading</td><td><span class="pill yellow">Medium</span></td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>A source fails to load on 2 runs in a row</td><td>Swap in an alternate source and flag it in that day's digest</td></tr>
+    </tbody>
+  </table>
+  </div>
 </section>
 
 <section id="changes">
@@ -276,6 +364,11 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
       <tr><td>Nov 20, 2026</td><td>Schedule uses America/Los_Angeles so it stays at 8:00am through daylight saving changes</td><td>CoS</td><td>Keeps the local time fixed</td></tr>
       <tr><td>Nov 20, 2026</td><td>Hub kept as a published page</td><td>CoS</td><td>One link, updated each sync</td></tr>
       <tr><td>Nov 20, 2026</td><td>D-01: project files are pushed to the private repo mikekhant/event-search after every change made in the CoS chat. Daily runs do not push.</td><td>Sponsor</td><td>Option A chosen; keeps the interest profile private</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Gate 1 approved</td><td>Sponsor</td><td>Charter accepted, including the shown-once rule</td></tr>
+      <tr><td>Nov 20, 2026</td><td>No usage limit and no usage readings for now</td><td>Sponsor</td><td>Sponsor's call</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Keep per-run limits of 8 searches and 15 page reads as a cost guard</td><td>CoS</td><td>The intake asks for low daily usage; reading this as unchanged</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Daily run reads a fixed source list before open search, and opens every event page</td><td>CoS</td><td>Testing showed search returns many past events</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Reviewer runs on Sonnet 5.5</td><td>CoS</td><td>Link and filter checks are routine work</td></tr>
     </tbody>
   </table>
   </div>
@@ -283,12 +376,12 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 
 <section id="budget">
   <h2><span class="n">10</span>Budget ledger</h2>
-  <p>Build budget: unlimited, set by the sponsor. Daily run cap: to be proposed at Gate 2.</p>
+  <p>Build budget: unlimited. The sponsor chose on Nov 20 not to limit or track usage for now, so no thresholds apply. Daily run guard: 8 searches and 15 page reads per run.</p>
   <div class="scroll">
   <table>
     <thead><tr><th>Date</th><th>Point</th><th>5-hour session</th><th>Weekly all models</th><th>Weekly Fable</th><th>Source</th></tr></thead>
     <tbody>
-      <tr><td>Nov 20, 2026</td><td>Gate 1</td><td>Pending</td><td>Pending</td><td>Pending</td><td>Sponsor reading requested</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Gate 1</td><td>Not taken</td><td>Not taken</td><td>Not taken</td><td>Sponsor waived readings</td></tr>
     </tbody>
   </table>
   </div>
@@ -297,6 +390,8 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 <section id="lessons">
   <h2><span class="n">11</span>Lessons learned</h2>
   <ul>
+    <li>Test scheduled-task permissions before planning around them. The first attempt to create one was blocked.</li>
+    <li>The template refers to a Part B onboarding template that was not included in the intake.</li>
     <li>The template assumes a multi-agent team. For a size S project, a lean-team option at intake saves a planning round.</li>
   </ul>
 </section>
