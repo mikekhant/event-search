@@ -30,9 +30,9 @@ Use these to judge fit. They show the type of event wanted, not specific events 
 - Starts today or within the next 14 days. Skip events that start today before 10:00 AM, because the digest arrives at 8:00 AM.
 - Costs $50 or less per event, before fees. Free is fine. Give the price whenever the listing or page shows it.
 - Location:
-  - Monday to Friday events: within about 20 miles of Irvine, CA. This covers Irvine, Tustin, Costa Mesa, Newport Beach, Santa Ana, Orange, Lake Forest, Laguna Beach, Laguna Hills, Aliso Viejo, Mission Viejo, Laguna Niguel, Dana Point, San Juan Capistrano, Huntington Beach, Fountain Valley, Garden Grove, Anaheim and Fullerton.
+  - Monday to Friday events: within about 30 miles of Irvine, CA. This covers all of Orange County (for example Irvine, Tustin, Costa Mesa, Newport Beach, Santa Ana, Orange, Anaheim, Buena Park, Fullerton, Brea, Garden Grove, Westminster, Huntington Beach, Seal Beach, Lake Forest, Mission Viejo, Laguna Beach, Dana Point, San Clemente) plus Long Beach.
   - Saturday and Sunday events: anywhere from Los Angeles County through Orange County to San Diego County.
-  - Los Angeles area events are for Saturday and Sunday only.
+  - The rest of Los Angeles County (anything beyond Long Beach, such as Monterey Park, West Hollywood or downtown Los Angeles) is for Saturday and Sunday only.
   - Online events: any day.
 - Open to the public or to UCI students and alumni. Skip invitation-only events and events whose registration is closed. An event that is full but has a waitlist may be listed, marked "waitlist".
 - Skip multi-day paid trainings and bootcamp-style courses, sales webinars, and children's events.
