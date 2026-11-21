@@ -156,8 +156,8 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
     <li><strong>On time:</strong> the digest is delivered by 8:30am America/Los_Angeles on 7 of 7 days in the acceptance week.</li>
     <li><strong>Complete entries:</strong> every event shows title, date and time, location, price, interest tag and a sign-up link. 100% of sampled links open that event's registration page.</li>
     <li><strong>Filters hold:</strong> 100% of listed events start within 14 days, cost $50 or less, and meet the distance rule for their day of week.</li>
-    <li><strong>No repeats:</strong> zero events appear in more than one digest, and zero declined events reappear.</li>
-    <li><strong>Volume:</strong> up to 10 events per day, ranked by fit. When fewer new events qualify, the digest lists fewer and says so.</li>
+    <li><strong>No repeats:</strong> zero events appear in more than one digest, and nothing matching the declined list (event, series or host) appears.</li>
+    <li><strong>Volume:</strong> up to 20 events per day (raised from 10 on Nov 21, see Change log), ranked by fit. When fewer new events qualify, the digest lists fewer and says so.</li>
     <li><strong>Coverage:</strong> every interest topic is searched at least twice in the acceptance week.</li>
     <li><strong>Cost:</strong> every daily run stays inside the per-run cap set at Gate 2.</li>
     <li><strong>Notice:</strong> a push notification goes out on days with new events, and a one-line note is logged on days with none.</li>
@@ -274,7 +274,7 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
   <ul>
     <li><strong>Topic rotation:</strong> each run covers 4 or 5 of the 11 topics, so every topic is searched at least 3 times a week. AI, technology and consulting networking runs most days.</li>
     <li><strong>Sources first:</strong> the run reads a fixed list of listing pages before it uses open search, because open search returns many past events.</li>
-    <li><strong>Run limits:</strong> up to 8 searches and 15 page reads per run. These guard cost and are not a project budget.</li>
+    <li><strong>Run limits:</strong> up to 14 searches and 25 page reads per run (raised on Nov 21 with the move to 20 events). These guard cost and are not a project budget.</li>
     <li><strong>Model:</strong> the daily task runs on Sonnet 5.5, set on Nov 20 at the sponsor's request.</li>
     <li><strong>Where things live:</strong> the profile is event-search/interest-profile.md, the digest is event-search/event-digest.md (latest 7 days, newest first) and the log is event-search/event-log.md, all in the Event Search project.</li>
   </ul>
@@ -330,8 +330,8 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
       <tr><td class="id">R1</td><td>The daily run cannot save or read its log, so events repeat</td><td><span class="pill green">Low</span>, test passed</td><td><span class="pill red">High</span></td><td>CoS</td><td>Any repeat in a digest</td><td>Move the log and digest to a Google Drive doc</td></tr>
       <tr><td class="id">R2</td><td>Creating scheduled tasks is blocked by a permission check</td><td><span class="pill green">Low</span>, worked after sponsor approval</td><td><span class="pill red">High</span></td><td>CoS</td><td>A second blocked attempt after sponsor approval</td><td>Sponsor creates the task in the app from the CoS prompt (D-02 option C)</td></tr>
       <tr><td class="id">R3</td><td>Wrong details or past events listed</td><td><span class="pill red">High</span>, seen in testing</td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>Any listed event fails a date, price or link check</td><td>Run opens every event page before listing; Reviewer opens every link on days 1 to 3. Triggered Nov 20: the run cannot open listing pages, so the rule leaves nothing to list</td></tr>
-      <tr><td class="id">R4</td><td>Daily cost runs high</td><td><span class="pill yellow">Medium</span></td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>A run exceeds 8 searches or 15 page reads</td><td>Tighten rotation, trim sources, drop to fewer topics per run</td></tr>
-      <tr><td class="id">R5</td><td>Too few new qualifying events to reach 10 a day</td><td><span class="pill red">High</span></td><td><span class="pill green">Low</span></td><td>CoS</td><td>Fewer than 5 events on 3 days in a row</td><td>Add sources; ask the sponsor whether to widen the window or radius</td></tr>
+      <tr><td class="id">R4</td><td>Daily cost runs high</td><td><span class="pill yellow">Medium</span></td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>A run exceeds 14 searches or 25 page reads</td><td>Tighten rotation, trim sources, drop to fewer topics per run</td></tr>
+      <tr><td class="id">R5</td><td>Too few new qualifying events to reach 10 a day</td><td><span class="pill red">High</span></td><td><span class="pill green">Low</span></td><td>CoS</td><td>Fewer than 10 events on 3 days in a row</td><td>Add sources; ask the sponsor whether to widen the window or radius</td></tr>
       <tr><td class="id">R6</td><td>Event sites block automated reading</td><td><span class="pill yellow">Medium</span></td><td><span class="pill yellow">Medium</span></td><td>CoS</td><td>A source fails to load on 2 runs in a row. <strong>Triggered Nov 20:</strong> all 8 sources failed in the test run</td><td>Swap in an alternate source and flag it in that day's digest</td></tr>
     </tbody>
   </table>
@@ -340,7 +340,15 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
 
 <section id="changes">
   <h2><span class="n">08</span>Change log</h2>
-  <p class="empty">No scope changes.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Date</th><th>Change</th><th>Impact</th><th>CoS recommendation</th><th>Sponsor decision</th></tr></thead>
+    <tbody>
+      <tr><td>Nov 21, 2026</td><td>Digest ceiling raised from 10 to 20 events per run</td><td>Run limits raised from 8 searches and 15 page reads to 14 and 25, so each run costs roughly 1.5 to 2 times as much. Quality risk: with no repeats, 20 good new matches a day is unlikely, so weaker fits will appear or the list will fall short. No time impact</td><td>Accept, with 20 as a ceiling and no padding</td><td>Directed by the sponsor</td></tr>
+      <tr><td>Nov 21, 2026</td><td>Declined list added (event, series or host)</td><td>One more doc read per run. Stops recurring events the sponsor has refused from returning under a new date</td><td>Accept</td><td>Directed by the sponsor</td></tr>
+    </tbody>
+  </table>
+  </div>
 </section>
 
 <section id="decision-log">
