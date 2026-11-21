@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Search Project Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one narrow reading column, status strip on top, numbered sections that match the Hub spec order. */
+:root {
+  --bg: #f4f6f7;
+  --surface: #ffffff;
+  --ink: #16242b;
+  --muted: #5a6b73;
+  --line: #d6dee2;
+  --accent: #0b6170;
+  --accent-soft: #e1eff1;
+  --good: #1f7a4d;
+  --good-soft: #e0f2e8;
+  --warn: #96690a;
+  --warn-soft: #fbf0d3;
+  --bad: #a8323a;
+  --bad-soft: #f8e1e2;
+  --display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #10191d; --surface: #18242a; --ink: #e6eef1; --muted: #9bb0b8; --line: #2c3c44;
+    --accent: #6cc5d3; --accent-soft: #1c3a41;
+    --good: #6fcf9b; --good-soft: #17352a; --warn: #e5bd5a; --warn-soft: #3a2f12; --bad: #f08a90; --bad-soft: #3d1c1f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #10191d; --surface: #18242a; --ink: #e6eef1; --muted: #9bb0b8; --line: #2c3c44;
+  --accent: #6cc5d3; --accent-soft: #1c3a41;
+  --good: #6fcf9b; --good-soft: #17352a; --warn: #e5bd5a; --warn-soft: #3a2f12; --bad: #f08a90; --bad-soft: #3d1c1f;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 72px; display: flex; flex-direction: column; gap: 28px; }
+header h1 { font-family: var(--display); font-size: 2rem; line-height: 1.15; margin: 0 0 4px; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); }
+nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.875rem; }
+nav a { color: var(--accent); text-decoration: none; }
+nav a:hover, nav a:focus-visible { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+h2 { font-family: var(--display); font-size: 1.25rem; margin: 0; display: flex; gap: 10px; align-items: baseline; }
+h2 .n { font-family: var(--mono); font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 6px 0 0; font-weight: 600; }
+p, ul, ol { margin: 0; max-width: 68ch; }
+ul, ol { padding-left: 20px; display: flex; flex-direction: column; gap: 5px; }
+.empty { color: var(--muted); font-style: italic; }
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.tile { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.tile .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tile .v { font-weight: 500; }
+.pill { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.green { background: var(--good-soft); color: var(--good); }
+.yellow { background: var(--warn-soft); color: var(--warn); }
+.red { background: var(--bad-soft); color: var(--bad); }
+.plain { background: var(--accent-soft); color: var(--accent); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Event Search Project Hub</h1>
+  <p>A daily 8:00am Pacific digest of events that match your interests, with sign-up links. Maintained by the Chief of Staff.</p>
+</header>
+
+<nav aria-label="Sections">
+  <a href="#status">1 Status</a>
+  <a href="#decisions">2 Decisions needed</a>
+  <a href="#orders">3 Order board</a>
+  <a href="#roster">4 Roster</a>
+  <a href="#charter">5 Charter</a>
+  <a href="#plan">6 Plan</a>
+  <a href="#risks">7 Risks</a>
+  <a href="#changes">8 Change log</a>
+  <a href="#decision-log">9 Decision log</a>
+  <a href="#budget">10 Budget</a>
+  <a href="#lessons">11 Lessons</a>
+</nav>
+
+<section id="status">
+  <h2><span class="n">01</span>Status</h2>
+  <div class="status">
+    <div class="tile"><span class="k">Phase</span><span class="v">1 Initiation, at Gate 1</span></div>
+    <div class="tile"><span class="k">Health</span><span class="v"><span class="pill green">Green</span> Charter drafted, nothing blocked</span></div>
+    <div class="tile"><span class="k">Next gate</span><span class="v">Gate 1 Charter approval, target Nov 20, 2026</span></div>
+    <div class="tile"><span class="k">Budget used</span><span class="v">First reading pending</span></div>
+    <div class="tile"><span class="k">Last sync</span><span class="v">None yet. Hub created Nov 20, 2026</span></div>
+  </div>
+</section>
+
+<section id="decisions">
+  <h2><span class="n">02</span>Decisions needed from me</h2>
+  <p class="empty">No open decision requests. Gate 1 sign-off is pending.</p>
+</section>
+
+<section id="orders">
+  <h2><span class="n">03</span>Order board</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>ID</th><th>To</th><th>Task</th><th>Acceptance criteria</th><th>Due</th><th>Status</th><th>Report</th></tr></thead>
+    <tbody><tr><td colspan="7" class="empty">No orders issued. Orders start after Gate 2.</td></tr></tbody>
+  </table>
+  </div>
+</section>
+
+<section id="roster">
+  <h2><span class="n">04</span>Agent roster</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th>Owns</th><th>Model</th><th>Chat name</th><th>Report</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>CoS</td><td>Chief of Staff and builder</td><td>Hub, plan, interest profile, daily task, verification</td><td>Current chat</td><td>This chat</td><td>This Hub</td><td><span class="pill green">Active</span></td></tr>
+      <tr><td>Reviewer</td><td>Independent check</td><td>Acceptance review of the first 3 digests</td><td>Set at Gate 2</td><td>Not created</td><td>Not created</td><td><span class="pill plain">Planned</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Lean team approved by the sponsor in Phase 0: the CoS builds, one Reviewer checks.</p>
+</section>
+
+<section id="charter">
+  <h2><span class="n">05</span>Project Charter</h2>
+
+  <h3>Objective</h3>
+  <p>Every day at 8:00am Pacific, deliver a digest of up to 10 new upcoming events that match the sponsor's professional and personal interests, each with a working sign-up link, at a low daily token cost.</p>
+
+  <h3>Interest profile</h3>
+  <ul>
+    <li><strong>Professional:</strong> networking events in AI, technology and consulting; UC Irvine events from the Paul Merage School of Business and the School of Information and Computer Sciences (ICS).</li>
+    <li><strong>Personal:</strong> golf, pickleball, raves, hiking, book clubs, workout and HIIT classes.</li>
+    <li><strong>Where:</strong> within 20 miles of Irvine for Monday to Friday events; from Los Angeles to San Diego for Saturday and Sunday events; online events any day.</li>
+    <li><strong>When and price:</strong> starts within the next 14 days; $50 or less per event.</li>
+  </ul>
+
+  <h3>Success criteria</h3>
+  <ol>
+    <li><strong>On time:</strong> the digest is delivered by 8:30am America/Los_Angeles on 7 of 7 days in the acceptance week.</li>
+    <li><strong>Complete entries:</strong> every event shows title, date and time, location, price, interest tag and a sign-up link. 100% of sampled links open that event's registration page.</li>
+    <li><strong>Filters hold:</strong> 100% of listed events start within 14 days, cost $50 or less, and meet the distance rule for their day of week.</li>
+    <li><strong>No repeats:</strong> zero events appear in more than one digest, and zero declined events reappear.</li>
+    <li><strong>Volume:</strong> up to 10 events per day, ranked by fit. When fewer new events qualify, the digest lists fewer and says so.</li>
+    <li><strong>Coverage:</strong> every interest topic is searched at least twice in the acceptance week.</li>
+    <li><strong>Cost:</strong> every daily run stays inside the per-run cap set at Gate 2.</li>
+    <li><strong>Notice:</strong> a push notification goes out on days with new events, and a one-line note is logged on days with none.</li>
+  </ol>
+
+  <h3>Scope in</h3>
+  <ul>
+    <li>Interest profile and filter rules.</li>
+    <li>A scheduled task that runs daily at 8:00am America/Los_Angeles.</li>
+    <li>Searching Luma and the wider web (for example Eventbrite, Meetup and UC Irvine event pages).</li>
+    <li>A running Event Digest doc in the Event Search project.</li>
+    <li>A log of events already shown or declined.</li>
+    <li>Calendar events created in this chat when the sponsor asks, after signing up.</li>
+  </ul>
+
+  <h3>Scope out</h3>
+  <ul>
+    <li>Registering, paying or signing up for anything on the sponsor's behalf.</li>
+    <li>Adding calendar events without being asked.</li>
+    <li>Emailing or contacting organizers, or posting anywhere.</li>
+    <li>Logging in to event accounts.</li>
+    <li>Events over $50 or more than 14 days away.</li>
+  </ul>
+
+  <h3>Deliverables</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>ID</th><th>Deliverable</th><th>Owner type</th></tr></thead>
+    <tbody>
+      <tr><td class="id">D1</td><td>Interest profile and filter rules (project doc)</td><td>CoS</td></tr>
+      <tr><td class="id">D2</td><td>Daily search task, scheduled for 8:00am Pacific</td><td>CoS as builder</td></tr>
+      <tr><td class="id">D3</td><td>Event Digest doc, appended each day</td><td>Daily task</td></tr>
+      <tr><td class="id">D4</td><td>Shown and declined log</td><td>Daily task; sponsor marks declines</td></tr>
+      <tr><td class="id">D5</td><td>Acceptance review of the first 3 digests</td><td>Reviewer agent</td></tr>
+      <tr><td class="id">D6</td><td>Handoff note: where things live, how to change interests</td><td>CoS</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Constraints</h3>
+  <ul>
+    <li>Daily token use must stay low. Build usage is unlimited.</li>
+    <li>Tools: web search and public event pages. No Luma connector was found, so Luma is covered through its public pages.</li>
+    <li>The agent never signs up, pays or contacts anyone.</li>
+  </ul>
+
+  <h3>Assumptions</h3>
+  <ul>
+    <li><strong>Unverified:</strong> a scheduled run can read and write the project doc that holds the digest and the log. To be tested first in Phase 2. Fallback: a Google Drive doc.</li>
+    <li><strong>Unverified:</strong> public Luma event pages can be found and read by the daily run.</li>
+    <li>An event is shown once and never again, whether or not the sponsor declined it. This covers the "do not show declined events" rule.</li>
+    <li>Price means the listed ticket price before fees.</li>
+    <li>Distance is judged by the event's city relative to Irvine, not by drive time.</li>
+    <li>Weekend range runs from Los Angeles in the north to San Diego in the south.</li>
+    <li>Ten per day is a ceiling. The digest is never padded with poor matches.</li>
+  </ul>
+
+  <h3>Stakeholders</h3>
+  <ul>
+    <li><strong>Sponsor:</strong> sets direction, approves gates, marks declines, signs up for events.</li>
+    <li><strong>CoS:</strong> plans, builds, verifies, reports.</li>
+    <li><strong>Reviewer agent:</strong> independent check of early digests.</li>
+  </ul>
+
+  <h3>Top 5 risks</h3>
+  <ol>
+    <li><strong>The daily run cannot remember past events,</strong> so repeats appear. Response: test persistence before building; fall back to a Google Drive doc.</li>
+    <li><strong>Daily cost runs high</strong> with 11 interest topics. Response: rotate topics across the week, cap searches and page reads, use a lighter model.</li>
+    <li><strong>Too few new qualifying events</strong> to fill 10 a day. Response: list fewer rather than pad; add sources if the gap persists.</li>
+    <li><strong>Wrong details or dead links</strong> taken from search snippets. Response: the run opens each event page before listing it; the Reviewer samples links.</li>
+    <li><strong>Event sites block automated reading.</strong> Response: use alternate sources and flag any source that could not be read in that day's digest.</li>
+  </ol>
+
+  <h3>High-level milestones</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Milestone</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>Gate 1 Charter approval</td><td>Nov 20, 2026</td></tr>
+      <tr><td>Gate 2 Plan and team approval</td><td>Nov 21, 2026</td></tr>
+      <tr><td>Daily task built, first scheduled run</td><td>Nov 22, 2026</td></tr>
+      <tr><td>Gate 3 Mid-point check, after 3 verified digests</td><td>Nov 25, 2026</td></tr>
+      <tr><td>Gate 4 Final acceptance, after 7 daily runs</td><td>Nov 30, 2026</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Targets assume same-day sign-off at each gate.</p>
+</section>
+
+<section id="plan">
+  <h2><span class="n">06</span>Plan</h2>
+  <p class="empty">Work breakdown, timeline and responsibility matrix are produced in Phase 2, after Gate 1.</p>
+</section>
+
+<section id="risks">
+  <h2><span class="n">07</span>Risk register</h2>
+  <p class="empty">The full register with likelihood, impact, owner and trigger is produced in Phase 2. The top 5 risks and responses are in the Charter.</p>
+</section>
+
+<section id="changes">
+  <h2><span class="n">08</span>Change log</h2>
+  <p class="empty">No scope changes.</p>
+</section>
+
+<section id="decision-log">
+  <h2><span class="n">09</span>Decision log</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Date</th><th>Decision</th><th>Made by</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Nov 20, 2026</td><td>Lean team: CoS builds, one Reviewer checks</td><td>Sponsor</td><td>Project is size S</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Digest goes to a project doc plus a push notification</td><td>Sponsor</td><td>Accepted CoS recommendation</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Up to 10 events per day; 14-day window; $50 cap; no weekday or weekend filter</td><td>Sponsor</td><td>Phase 0 answers</td></tr>
+      <tr><td>Nov 20, 2026</td><td>No sign-ups or automatic calendar adds; calendar events on request only</td><td>Sponsor</td><td>Phase 0 answers</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Per-run cost cap to be set by the CoS at Gate 2</td><td>Sponsor</td><td>No preference stated</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Schedule uses America/Los_Angeles so it stays at 8:00am through daylight saving changes</td><td>CoS</td><td>Keeps the local time fixed</td></tr>
+      <tr><td>Nov 20, 2026</td><td>Hub kept as a published page</td><td>CoS</td><td>One link, updated each sync</td></tr>
+      <tr><td>Nov 20, 2026</td><td>D-01: project files are pushed to the private repo mikekhant/event-search after every change made in the CoS chat. Daily runs do not push.</td><td>Sponsor</td><td>Option A chosen; keeps the interest profile private</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="budget">
+  <h2><span class="n">10</span>Budget ledger</h2>
+  <p>Build budget: unlimited, set by the sponsor. Daily run cap: to be proposed at Gate 2.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Date</th><th>Point</th><th>5-hour session</th><th>Weekly all models</th><th>Weekly Fable</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Nov 20, 2026</td><td>Gate 1</td><td>Pending</td><td>Pending</td><td>Pending</td><td>Sponsor reading requested</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="lessons">
+  <h2><span class="n">11</span>Lessons learned</h2>
+  <ul>
+    <li>The template assumes a multi-agent team. For a size S project, a lean-team option at intake saves a planning round.</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>
