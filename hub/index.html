@@ -101,10 +101,10 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
   <h2><span class="n">01</span>Status</h2>
   <div class="status">
     <div class="tile"><span class="k">Phase</span><span class="v">3 Execution</span></div>
-    <div class="tile"><span class="k">Health</span><span class="v"><span class="pill yellow">Yellow</span> Test run found 0 events: 8 of 8 listing pages failed to load in the scheduled run</span></div>
+    <div class="tile"><span class="k">Health</span><span class="v"><span class="pill yellow">Yellow</span> Nov 21 digest listed 9 events, but the Reviewer could not open any link, so none are independently verified</span></div>
     <div class="tile"><span class="k">Next gate</span><span class="v">Gate 3 Mid-point check, target Nov 24, 2026</span></div>
     <div class="tile"><span class="k">Budget used</span><span class="v">Not tracked, by sponsor decision</span></div>
-    <div class="tile"><span class="k">Last sync</span><span class="v">None yet. Hub updated Nov 20, 2026</span></div>
+    <div class="tile"><span class="k">Last sync</span><span class="v">Nov 21, 2026</span></div>
   </div>
 </section>
 
@@ -118,7 +118,7 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
   <div class="scroll">
   <table>
     <thead><tr><th>ID</th><th>To</th><th>Task</th><th>Acceptance criteria</th><th>Due</th><th>Status</th><th>Report</th></tr></thead>
-    <tbody><tr><td class="id">R-01</td><td>Reviewer</td><td>Check every event in each day's newest digest section against the filter rules</td><td>Every link opened; pass or fail per event for date, price, location and registration; repeats checked; fails quoted; unchecked items listed</td><td>Gate 3</td><td><span class="pill plain">Issued</span></td><td>event-search/review-report.md in the project</td></tr></tbody>
+    <tbody><tr><td class="id">R-01</td><td>Reviewer</td><td>Check every event in each day's newest digest section against the filter rules</td><td>Every link opened; pass or fail per event for date, price, location and registration; repeats checked; fails quoted; unchecked items listed</td><td>Gate 3</td><td><span class="pill red">Returned</span> Nov 21 report was Blocked (0 of 9 links opened). Brief fixed; re-review due Nov 22</td><td>event-search/review-report.md in the project</td></tr></tbody>
   </table>
   </div>
 </section>
@@ -367,6 +367,10 @@ td.id { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
       <tr><td>Nov 20, 2026</td><td>CoS writes the Reviewer brief; no Part B template</td><td>Sponsor</td><td>One agent only</td></tr>
       <tr><td>Nov 20, 2026</td><td>D-03: the Reviewer runs as a cloud scheduled task (option A). It reads its brief from the project and writes its report there.</td><td>Sponsor</td><td>No pasting of briefs or reports</td></tr>
       <tr><td>Nov 20, 2026</td><td>Daily runs use Sonnet 5.5, not Fable</td><td>Sponsor</td><td>Keeps daily runs off the weekly Fable limit</td></tr>
+      <tr><td>Nov 21, 2026</td><td>Interest profile updated from 5 example events: added SOCIAL and wellness, widened NET to casual tech socials, widened UCI to Beall Applied Innovation and University Center, added Luma hosts as sources</td><td>Sponsor</td><td>Examples given by the sponsor</td></tr>
+      <tr><td>Nov 21, 2026</td><td>Runs search first and open only addresses that search returned</td><td>CoS</td><td>Page reads are refused for addresses that did not come from a search in the same run</td></tr>
+      <tr><td>Nov 21, 2026</td><td>Reviewer may use search results as weaker, labelled evidence, and re-reviews a Blocked report</td><td>CoS</td><td>Nov 21 review was Blocked: 0 of 9 links opened</td></tr>
+      <tr><td>Nov 21, 2026</td><td>D-04 withdrawn</td><td>CoS</td><td>The Nov 21 run listed 9 events from listings without a rule change</td></tr>
       <tr><td>Nov 20, 2026</td><td>Daily task starts at 7:37am Pacific</td><td>CoS</td><td>Runs on the hour can be delayed; an early start has the digest ready by 8:00</td></tr>
       <tr><td>Nov 20, 2026</td><td>The run reads the interest profile from the project each day</td><td>CoS</td><td>The sponsor can change interests by editing one doc</td></tr>
       <tr><td>Nov 20, 2026</td><td>Digest doc keeps the latest 7 days</td><td>CoS</td><td>A doc that grows forever costs more to rewrite every day</td></tr>
